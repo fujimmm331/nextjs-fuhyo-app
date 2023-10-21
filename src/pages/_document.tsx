@@ -22,15 +22,14 @@ export default class MyDocument extends Document {
       return {
         ...initialProps,
         styles: [
-          // もともとのstyle
-          initialProps.styles,
-          // styled-components のstyle
-          sheet.getStyleElement(),
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
         ],
       }
-    } catch (error) {
-      sheet.seal()
-      throw error;
+    } finally {
+      sheet.seal();
     }
   }
 }
